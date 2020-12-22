@@ -104,13 +104,3 @@
                 src: "{{ docroot }}/new-tc.bkp.zip"
                 dest: "{{ docroot }}/"
                 copy: no
- - name: Telegram Messege to remind me
-   gather_facts: false
-   hosts: local
-   tasks:
-        - name: Sending messege
-          telegram:
-            token: '1327662184:AAFeUd9puifoNOQD65ZNVdCLddHAKVEQM98'
-            chat_id: 635834411
-            msg: "Deployed {{ branch_tag }} on UAT 54-{{ uat_port }}, Please check."
-
