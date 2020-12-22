@@ -47,13 +47,3 @@
         copy:
           src: "{{ git_dir }}/tata-capital-li-ui.zip"
           dest: "{{ home_dir }}/tata-capital-li-ui.zip"
- 
- - name: Sending messege for notification
-   gather_facts: false
-   hosts: local
-   tasks:  
-   - name: "send messege....." 
-     telegram:
-        token: '1327662184:AAFeUd9puifoNOQD65ZNVdCLddHAKVEQM98'
-        chat_id: 635834411
-        msg: " tag is copied on all Prod web servers"

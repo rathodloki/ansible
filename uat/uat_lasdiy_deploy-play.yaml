@@ -59,29 +59,20 @@
    - name: deploy lasdiy jar
      block:
      - name: uninstalling tatacap-las-portal-1.0.0-SNAPSHOT.jar from 7501
-       shell: 'curl -u admin:tata123 -F action=uninstall http://172.27.16.52:7501/system/console/bundles/com.tatacapital.tatacap-las-portal'
+       shell: 'curl -u admin:tata123 -F action=uninstall http://ipadd:7501/system/console/bundles/com.tatacapital.tatacap-las-portal'
      - name: installing tatacap-las-portal-1.0.0-SNAPSHOT.jar from 7501
-       shell: 'curl -u admin:tata123 -F action=install -F bundlestartlevel=20 -F bundlefile=@"{{ lasdiy_jar }}" http://172.27.16.52:7501/system/console/bundles'
+       shell: 'curl -u admin:tata123 -F action=install -F bundlestartlevel=20 -F bundlefile=@"{{ lasdiy_jar }}" http://ipadd:7501/system/console/bundles'
      - name: Starting  tatacap-las-portal-1.0.0-SNAPSHOT.jar from 7501
-       shell: 'curl -u admin:tata123 -F action=start http://172.27.16.52:7501/system/console/bundles/com.tatacapital.tatacap-las-portal'
+       shell: 'curl -u admin:tata123 -F action=start http://ipadd:7501/system/console/bundles/com.tatacapital.tatacap-las-portal'
      when: shaft_port == "7501" or shaft_port == "both"
 
    - block:
      - name: uninstalling tatacap-las-portal-1.0.0-SNAPSHOT.jar from 7505
-       shell: 'curl -u admin:tatauat123  -F action=uninstall http://172.27.16.52:7505/system/console/bundles/com.tatacapital.tatacap-las-portal'
+       shell: 'curl -u admin:tatauat123  -F action=uninstall http://ipadd:7505/system/console/bundles/com.tatacapital.tatacap-las-portal'
      - name: installing tatacap-las-portal-1.0.0-SNAPSHOT.jar from 7505
-       shell: 'curl -u admin:tatauat123  -F action=install -F bundlestartlevel=20 -F bundlefile=@"{{ lasdiy_jar  }}" http://172.27.16.52:7505/system/console/bundles'
+       shell: 'curl -u admin:tatauat123  -F action=install -F bundlestartlevel=20 -F bundlefile=@"{{ lasdiy_jar  }}" http://ipadd:7505/system/console/bundles'
      - name: Starting  tatacap-las-portal-1.0.0-SNAPSHOT.jar from 7505
-       shell: 'curl -u admin:tatauat123  -F action=start http://172.27.16.52:7505/system/console/bundles/com.tatacapital.tatacap-las-portal'
+       shell: 'curl -u admin:tatauat123  -F action=start http://ipadd:7505/system/console/bundles/com.tatacapital.tatacap-las-portal'
      when: shaft_port == "7505" or shaft_port == "both"
 
- - name: Telegram Messege to remind me
-   gather_facts: false
-   hosts: local
-   tasks:
-     - name: Sending messege
-       telegram:
-         token: '1327662184:AAFeUd9puifoNOQD65ZNVdCLddHAKVEQM98'
-         chat_id: 635834411
-         msg: "lasdiy Deployed {{ branch_tag }} on UAT 52-{{ shaft_port }}, Please check."
 
