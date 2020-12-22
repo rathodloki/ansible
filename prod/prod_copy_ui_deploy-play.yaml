@@ -1,0 +1,59 @@
+---
+ - name: play for deploying branch on local
+   gather_facts: false
+   hosts: local
+   vars:
+       git_dir: /home/ansible/git_deployment
+   vars_prompt:
+              name: "branch_tag"
+              prompt: 'Enter Branch or Tag Name'
+              private: no
+   tasks:
+      - name: taking git repo from branch or tag
+        block:
+        - git:
+           repo: git@gitlab.com:tekno-shaft/tata-capital-li-ui.git
+           key_file: /home/ansible/.ssh/id_rsa
+           dest: "{{ git_dir }}/tata-capital-li-ui"
+           archive: "{{ git_dir }}/tata-capital-li-ui.zip"
+           version: "{{ branch_tag }}"
+           force: yes
+           accept_hostkey: yes
+        rescue:
+        - name: Deleting Files which are pulled and trying again.
+          file:
+              path: "{{ git_dir }}/tata-capital-li-ui"
+              state: absent
+        - git:
+           repo: git@gitlab.com:tekno-shaft/tata-capital-li-ui.git
+           key_file: /home/ansible/.ssh/id_rsa
+           dest: "{{ git_dir }}/tata-capital-li-ui"
+           archive: "{{ git_dir }}/tata-capital-li-ui.zip"
+           version: "{{ branch_tag }}"
+           force: yes
+           accept_hostkey: yes
+ 
+
+ - name: play for copy data to the web server
+   vars: 
+       git_dir: /home/ansible/git_deployment
+   gather_facts: false
+   hosts: web
+   tags:
+     - deploy 
+     - ui  
+   tasks:
+      - name: copy data to web servers
+        copy:
+          src: "{{ git_dir }}/tata-capital-li-ui.zip"
+          dest: "{{ home_dir }}/tata-capital-li-ui.zip"
+ 
+ - name: Sending messege for notification
+   gather_facts: false
+   hosts: local
+   tasks:  
+   - name: "send messege....." 
+     telegram:
+        token: '1327662184:AAFeUd9puifoNOQD65ZNVdCLddHAKVEQM98'
+        chat_id: 635834411
+        msg: " tag is copied on all Prod web servers"

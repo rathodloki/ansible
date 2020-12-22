@@ -1,0 +1,204 @@
+2020-11-03 00:29:00,826 p=29417 u=ansible n=ansible |  [ERROR]: User interrupted execution
+
+2020-11-03 00:32:32,871 p=29688 u=ansible n=ansible |  [ERROR]: User interrupted execution
+
+2020-11-03 00:33:08,398 p=29733 u=ansible n=ansible | PLAY [play for deploying branch on local] **************************************
+2020-11-03 00:33:08,433 p=29733 u=ansible n=ansible | TASK [git] *********************************************************************
+2020-11-03 00:33:26,700 p=29733 u=ansible n=ansible | ok: [localhost]
+2020-11-03 00:33:26,711 p=29733 u=ansible n=ansible | PLAY [play for copy data to the web server] ************************************
+2020-11-03 00:33:26,736 p=29733 u=ansible n=ansible | TASK [copy data to web servers] ************************************************
+2020-11-03 00:33:42,501 p=29733 u=ansible n=ansible | changed: [172.27.8.164]
+2020-11-03 00:33:48,245 p=29733 u=ansible n=ansible | changed: [172.27.8.166]
+2020-11-03 00:33:56,288 p=29733 u=ansible n=ansible | changed: [172.27.8.165]
+2020-11-03 00:33:56,300 p=29733 u=ansible n=ansible | PLAY [Sending messege for notification] ****************************************
+2020-11-03 00:33:56,321 p=29733 u=ansible n=ansible | TASK [send messege.....] *******************************************************
+2020-11-03 00:33:59,815 p=29733 u=ansible n=ansible | [WARNING]: The value ******** (type int) in a string field was converted to
+u'********' (type string). If this does not look like what you expect, quote
+the entire value to ensure it does not change.
+
+2020-11-03 00:33:59,816 p=29733 u=ansible n=ansible | changed: [localhost]
+2020-11-03 00:33:59,823 p=29733 u=ansible n=ansible | PLAY RECAP *********************************************************************
+2020-11-03 00:33:59,824 p=29733 u=ansible n=ansible | 172.27.8.164               : ok=1    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+2020-11-03 00:33:59,824 p=29733 u=ansible n=ansible | 172.27.8.165               : ok=1    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+2020-11-03 00:33:59,825 p=29733 u=ansible n=ansible | 172.27.8.166               : ok=1    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+2020-11-03 00:33:59,825 p=29733 u=ansible n=ansible | localhost                  : ok=2    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+2020-11-07 20:39:32,934 p=9449 u=ansible n=ansible | PLAY [play for deploying branch on local] **********************************************************************************************************
+2020-11-07 20:39:33,034 p=9449 u=ansible n=ansible | TASK [git] *****************************************************************************************************************************************
+2020-11-07 20:39:50,573 p=9449 u=ansible n=ansible | ok: [localhost]
+2020-11-07 20:39:50,584 p=9449 u=ansible n=ansible | PLAY [play for copy data to the web server] ********************************************************************************************************
+2020-11-07 20:39:50,606 p=9449 u=ansible n=ansible | TASK [copy data to web servers] ********************************************************************************************************************
+2020-11-07 20:40:02,811 p=9449 u=ansible n=ansible | changed: [172.27.8.164]
+2020-11-07 20:40:04,401 p=9449 u=ansible n=ansible | changed: [172.27.8.165]
+2020-11-07 20:40:07,743 p=9449 u=ansible n=ansible | changed: [172.27.8.166]
+2020-11-07 20:40:07,755 p=9449 u=ansible n=ansible | PLAY [Sending messege for notification] ************************************************************************************************************
+2020-11-07 20:40:07,775 p=9449 u=ansible n=ansible | TASK [send messege.....] ***************************************************************************************************************************
+2020-11-07 20:40:07,902 p=9449 u=ansible n=ansible | fatal: [localhost]: FAILED! => {"msg": "The task includes an option with an undefined variable. The error was: 'branch_tag' is undefined\n\nThe error appears to be in '/home/ansible/ansible-tata-li-ui/prod/prod_copy_ui_deploy-play.yaml': line 55, column 6, but may\nbe elsewhere in the file depending on the exact syntax problem.\n\nThe offending line appears to be:\n\n   tasks:\n   - name: \"send messege.....\"\n     ^ here\n"}
+2020-11-07 20:40:07,912 p=9449 u=ansible n=ansible | PLAY RECAP *****************************************************************************************************************************************
+2020-11-07 20:40:07,912 p=9449 u=ansible n=ansible | 172.27.8.164               : ok=1    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+2020-11-07 20:40:07,913 p=9449 u=ansible n=ansible | 172.27.8.165               : ok=1    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+2020-11-07 20:40:07,914 p=9449 u=ansible n=ansible | 172.27.8.166               : ok=1    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+2020-11-07 20:40:07,914 p=9449 u=ansible n=ansible | localhost                  : ok=1    changed=0    unreachable=0    failed=1    skipped=0    rescued=0    ignored=0   
+2020-11-08 00:46:18,665 p=11060 u=ansible n=ansible | PLAY [play for deploying branch on local] **************************************
+2020-11-08 00:46:18,867 p=11060 u=ansible n=ansible | TASK [git] *********************************************************************
+2020-11-08 00:46:44,618 p=11060 u=ansible n=ansible | ok: [localhost]
+2020-11-08 00:46:44,628 p=11060 u=ansible n=ansible | PLAY [play for copy data to the web server] ************************************
+2020-11-08 00:46:44,648 p=11060 u=ansible n=ansible | TASK [copy data to web servers] ************************************************
+2020-11-08 00:50:13,645 p=11060 u=ansible n=ansible | changed: [172.27.8.166]
+2020-11-08 00:50:49,352 p=11060 u=ansible n=ansible | changed: [172.27.8.165]
+2020-11-08 00:50:56,039 p=11060 u=ansible n=ansible | changed: [172.27.8.164]
+2020-11-08 00:50:56,062 p=11060 u=ansible n=ansible | PLAY [Sending messege for notification] ****************************************
+2020-11-08 00:50:56,080 p=11060 u=ansible n=ansible | TASK [send messege.....] *******************************************************
+2020-11-08 00:51:00,515 p=11060 u=ansible n=ansible | [WARNING]: The value ******** (type int) in a string field was converted to
+u'********' (type string). If this does not look like what you expect, quote
+the entire value to ensure it does not change.
+
+2020-11-08 00:51:00,516 p=11060 u=ansible n=ansible | changed: [localhost]
+2020-11-08 00:51:00,523 p=11060 u=ansible n=ansible | PLAY RECAP *********************************************************************
+2020-11-08 00:51:00,523 p=11060 u=ansible n=ansible | 172.27.8.164               : ok=1    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+2020-11-08 00:51:00,524 p=11060 u=ansible n=ansible | 172.27.8.165               : ok=1    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+2020-11-08 00:51:00,524 p=11060 u=ansible n=ansible | 172.27.8.166               : ok=1    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+2020-11-08 00:51:00,525 p=11060 u=ansible n=ansible | localhost                  : ok=2    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+2020-11-09 22:52:07,487 p=8735 u=ansible n=ansible | PLAY [play for deploying branch on local] **********************************************************************************************************
+2020-11-09 22:52:07,550 p=8735 u=ansible n=ansible | TASK [git] *****************************************************************************************************************************************
+2020-11-09 22:52:35,285 p=8735 u=ansible n=ansible | ok: [localhost]
+2020-11-09 22:52:35,297 p=8735 u=ansible n=ansible | PLAY [play for copy data to the web server] ********************************************************************************************************
+2020-11-09 22:52:35,319 p=8735 u=ansible n=ansible | TASK [copy data to web servers] ********************************************************************************************************************
+2020-11-09 22:52:36,810 p=8735 u=ansible n=ansible | fatal: [172.27.8.166]: UNREACHABLE! => {"changed": false, "msg": "Failed to create temporary directory.In some cases, you may have been able to authenticate and did not have permissions on the target directory. Consider changing the remote tmp path in ansible.cfg to a path rooted in \"/tmp\", for more error information use -vvv. Failed command was: ( umask 77 && mkdir -p \"` echo ~/.ansible/tmp `\"&& mkdir ~/.ansible/tmp/ansible-tmp-1604942556.62-8914-14193994440873 && echo ansible-tmp-1604942556.62-8914-14193994440873=\"` echo ~/.ansible/tmp/ansible-tmp-1604942556.62-8914-14193994440873 `\" ), exited with result 1", "unreachable": true}
+2020-11-09 22:52:57,839 p=8735 u=ansible n=ansible | changed: [172.27.8.165]
+2020-11-09 22:53:09,537 p=8735 u=ansible n=ansible | changed: [172.27.8.164]
+2020-11-09 22:53:09,560 p=8735 u=ansible n=ansible | PLAY [Sending messege for notification] ************************************************************************************************************
+2020-11-09 22:53:09,603 p=8735 u=ansible n=ansible | TASK [send messege.....] ***************************************************************************************************************************
+2020-11-09 22:53:13,348 p=8735 u=ansible n=ansible | [WARNING]: The value ******** (type int) in a string field was converted to u'********' (type string). If this does not look like what you expect,
+quote the entire value to ensure it does not change.
+
+2020-11-09 22:53:13,352 p=8735 u=ansible n=ansible | changed: [localhost]
+2020-11-09 22:53:13,358 p=8735 u=ansible n=ansible | PLAY RECAP *****************************************************************************************************************************************
+2020-11-09 22:53:13,363 p=8735 u=ansible n=ansible | 172.27.8.164               : ok=1    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+2020-11-09 22:53:13,364 p=8735 u=ansible n=ansible | 172.27.8.165               : ok=1    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+2020-11-09 22:53:13,365 p=8735 u=ansible n=ansible | 172.27.8.166               : ok=0    changed=0    unreachable=1    failed=0    skipped=0    rescued=0    ignored=0   
+2020-11-09 22:53:13,365 p=8735 u=ansible n=ansible | localhost                  : ok=2    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+2020-11-12 19:44:35,442 p=19585 u=ansible n=ansible | PLAY [play for deploying branch on local] **********************************************************************************************************
+2020-11-12 19:44:35,553 p=19585 u=ansible n=ansible | TASK [git] *****************************************************************************************************************************************
+2020-11-12 19:44:54,405 p=19585 u=ansible n=ansible | ok: [localhost]
+2020-11-12 19:44:54,417 p=19585 u=ansible n=ansible | PLAY [play for copy data to the web server] ********************************************************************************************************
+2020-11-12 19:44:54,438 p=19585 u=ansible n=ansible | TASK [copy data to web servers] ********************************************************************************************************************
+2020-11-12 19:45:06,039 p=19585 u=ansible n=ansible | changed: [172.27.8.164]
+2020-11-12 19:45:13,728 p=19585 u=ansible n=ansible | changed: [172.27.8.165]
+2020-11-12 19:45:15,862 p=19585 u=ansible n=ansible | changed: [172.27.8.166]
+2020-11-12 19:45:15,873 p=19585 u=ansible n=ansible | PLAY [Sending messege for notification] ************************************************************************************************************
+2020-11-12 19:45:15,897 p=19585 u=ansible n=ansible | TASK [send messege.....] ***************************************************************************************************************************
+2020-11-12 19:45:19,498 p=19585 u=ansible n=ansible | [WARNING]: The value ******** (type int) in a string field was converted to u'********' (type string). If this does not look like what you expect,
+quote the entire value to ensure it does not change.
+
+2020-11-12 19:45:19,499 p=19585 u=ansible n=ansible | changed: [localhost]
+2020-11-12 19:45:19,510 p=19585 u=ansible n=ansible | PLAY RECAP *****************************************************************************************************************************************
+2020-11-12 19:45:19,511 p=19585 u=ansible n=ansible | 172.27.8.164               : ok=1    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+2020-11-12 19:45:19,511 p=19585 u=ansible n=ansible | 172.27.8.165               : ok=1    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+2020-11-12 19:45:19,512 p=19585 u=ansible n=ansible | 172.27.8.166               : ok=1    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+2020-11-12 19:45:19,512 p=19585 u=ansible n=ansible | localhost                  : ok=2    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+2020-11-18 21:55:13,624 p=20819 u=ansible n=ansible | PLAY [play for deploying branch on local] **********************************************************************************************************
+2020-11-18 21:55:13,668 p=20819 u=ansible n=ansible | TASK [git] *****************************************************************************************************************************************
+2020-11-18 21:55:37,560 p=20819 u=ansible n=ansible | changed: [localhost]
+2020-11-18 21:55:37,572 p=20819 u=ansible n=ansible | PLAY [play for copy data to the web server] ********************************************************************************************************
+2020-11-18 21:55:37,595 p=20819 u=ansible n=ansible | TASK [copy data to web servers] ********************************************************************************************************************
+2020-11-18 21:55:52,681 p=20819 u=ansible n=ansible | changed: [172.27.8.165]
+2020-11-18 21:55:52,693 p=20819 u=ansible n=ansible | changed: [172.27.8.164]
+2020-11-18 21:55:52,717 p=20819 u=ansible n=ansible | changed: [172.27.8.166]
+2020-11-18 21:55:52,747 p=20819 u=ansible n=ansible | PLAY [Sending messege for notification] ************************************************************************************************************
+2020-11-18 21:55:52,792 p=20819 u=ansible n=ansible | TASK [send messege.....] ***************************************************************************************************************************
+2020-11-18 21:55:56,172 p=20819 u=ansible n=ansible | [WARNING]: The value ******** (type int) in a string field was converted to u'********' (type string). If this does not look like what you expect,
+quote the entire value to ensure it does not change.
+
+2020-11-18 21:55:56,175 p=20819 u=ansible n=ansible | changed: [localhost]
+2020-11-18 21:55:56,179 p=20819 u=ansible n=ansible | PLAY RECAP *****************************************************************************************************************************************
+2020-11-18 21:55:56,180 p=20819 u=ansible n=ansible | 172.27.8.164               : ok=1    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+2020-11-18 21:55:56,180 p=20819 u=ansible n=ansible | 172.27.8.165               : ok=1    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+2020-11-18 21:55:56,181 p=20819 u=ansible n=ansible | 172.27.8.166               : ok=1    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+2020-11-18 21:55:56,181 p=20819 u=ansible n=ansible | localhost                  : ok=2    changed=2    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+2020-12-01 14:17:41,012 p=2821 u=ansible n=ansible | PLAY [play for deploying branch on local] **********************************************************************************************************
+2020-12-01 14:17:41,066 p=2821 u=ansible n=ansible | TASK [git] *****************************************************************************************************************************************
+2020-12-01 14:18:07,581 p=2821 u=ansible n=ansible | changed: [localhost]
+2020-12-01 14:18:07,595 p=2821 u=ansible n=ansible | PLAY [play for copy data to the web server] ********************************************************************************************************
+2020-12-01 14:18:07,616 p=2821 u=ansible n=ansible | TASK [copy data to web servers] ********************************************************************************************************************
+2020-12-01 14:21:26,760 p=2821 u=ansible n=ansible | changed: [172.27.8.164]
+2020-12-01 14:21:26,973 p=2821 u=ansible n=ansible | changed: [172.27.8.166]
+2020-12-01 14:21:42,973 p=2821 u=ansible n=ansible | changed: [172.27.8.165]
+2020-12-01 14:21:43,025 p=2821 u=ansible n=ansible | PLAY [Sending messege for notification] ************************************************************************************************************
+2020-12-01 14:21:43,071 p=2821 u=ansible n=ansible | TASK [send messege.....] ***************************************************************************************************************************
+2020-12-01 14:21:51,216 p=2821 u=ansible n=ansible | [WARNING]: The value ******** (type int) in a string field was converted to u'********' (type string). If this does not look like what you expect,
+quote the entire value to ensure it does not change.
+
+2020-12-01 14:21:51,221 p=2821 u=ansible n=ansible | changed: [localhost]
+2020-12-01 14:21:51,228 p=2821 u=ansible n=ansible | PLAY RECAP *****************************************************************************************************************************************
+2020-12-01 14:21:51,229 p=2821 u=ansible n=ansible | 172.27.8.164               : ok=1    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+2020-12-01 14:21:51,229 p=2821 u=ansible n=ansible | 172.27.8.165               : ok=1    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+2020-12-01 14:21:51,230 p=2821 u=ansible n=ansible | 172.27.8.166               : ok=1    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+2020-12-01 14:21:51,231 p=2821 u=ansible n=ansible | localhost                  : ok=2    changed=2    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+2020-12-01 19:28:15,135 p=28039 u=ansible n=ansible | PLAY [play for deploying branch on local] **********************************************************************************************************
+2020-12-01 19:28:15,178 p=28039 u=ansible n=ansible | TASK [git] *****************************************************************************************************************************************
+2020-12-01 19:28:36,957 p=28039 u=ansible n=ansible | ok: [localhost]
+2020-12-01 19:28:36,973 p=28039 u=ansible n=ansible | PLAY [play for copy data to the web server] ********************************************************************************************************
+2020-12-01 19:28:37,005 p=28039 u=ansible n=ansible | TASK [copy data to web servers] ********************************************************************************************************************
+2020-12-01 19:44:45,102 p=28039 u=ansible n=ansible | changed: [172.27.8.166]
+2020-12-09 20:52:11,935 p=11596 u=ansible n=ansible | PLAY [play for deploying branch on local] **********************************************************************************************************
+2020-12-09 20:52:12,039 p=11596 u=ansible n=ansible | TASK [git] *****************************************************************************************************************************************
+2020-12-09 20:52:34,323 p=11596 u=ansible n=ansible | changed: [localhost]
+2020-12-09 20:52:34,339 p=11596 u=ansible n=ansible | PLAY [play for copy data to the web server] ********************************************************************************************************
+2020-12-09 20:52:34,377 p=11596 u=ansible n=ansible | TASK [copy data to web servers] ********************************************************************************************************************
+2020-12-09 20:55:41,948 p=11894 u=ansible n=ansible | [WARNING]: sftp transfer mechanism failed on [172.27.8.165]. Use ANSIBLE_DEBUG=1 to see detailed information
+
+2020-12-09 21:01:47,560 p=11893 u=ansible n=ansible | [WARNING]: sftp transfer mechanism failed on [172.27.8.164]. Use ANSIBLE_DEBUG=1 to see detailed information
+
+2020-12-09 21:01:47,728 p=11895 u=ansible n=ansible | [WARNING]: sftp transfer mechanism failed on [172.27.8.166]. Use ANSIBLE_DEBUG=1 to see detailed information
+
+2020-12-09 21:01:47,932 p=11893 u=ansible n=ansible | [WARNING]: scp transfer mechanism failed on [172.27.8.164]. Use ANSIBLE_DEBUG=1 to see detailed information
+
+2020-12-09 21:01:48,094 p=11894 u=ansible n=ansible | [WARNING]: scp transfer mechanism failed on [172.27.8.165]. Use ANSIBLE_DEBUG=1 to see detailed information
+
+2020-12-09 21:01:58,095 p=11895 u=ansible n=ansible | [WARNING]: scp transfer mechanism failed on [172.27.8.166]. Use ANSIBLE_DEBUG=1 to see detailed information
+
+2020-12-09 21:01:58,426 p=11596 u=ansible n=ansible | fatal: [172.27.8.164]: FAILED! => {"msg": "Failed to connect to the host via ssh: ssh: connect to host 172.27.8.164 port 22: Connection timed out"}
+2020-12-09 21:01:58,518 p=11596 u=ansible n=ansible | fatal: [172.27.8.165]: FAILED! => {"msg": "Failed to connect to the host via ssh: ssh: connect to host 172.27.8.165 port 22: Connection timed out"}
+2020-12-09 21:02:18,254 p=11596 u=ansible n=ansible | fatal: [172.27.8.166]: FAILED! => {"msg": "Failed to connect to the host via ssh: ssh: connect to host 172.27.8.166 port 22: Connection timed out"}
+2020-12-09 21:02:18,256 p=11596 u=ansible n=ansible | PLAY RECAP *****************************************************************************************************************************************
+2020-12-09 21:02:18,257 p=11596 u=ansible n=ansible | 172.27.8.164               : ok=0    changed=0    unreachable=0    failed=1    skipped=0    rescued=0    ignored=0   
+2020-12-09 21:02:18,258 p=11596 u=ansible n=ansible | 172.27.8.165               : ok=0    changed=0    unreachable=0    failed=1    skipped=0    rescued=0    ignored=0   
+2020-12-09 21:02:18,258 p=11596 u=ansible n=ansible | 172.27.8.166               : ok=0    changed=0    unreachable=0    failed=1    skipped=0    rescued=0    ignored=0   
+2020-12-09 21:02:18,259 p=11596 u=ansible n=ansible | localhost                  : ok=1    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+2020-12-09 21:03:21,280 p=12728 u=ansible n=ansible |  [ERROR]: User interrupted execution
+
+2020-12-09 21:03:52,965 p=12782 u=ansible n=ansible |  [ERROR]: User interrupted execution
+
+2020-12-09 21:04:49,846 p=12800 u=ansible n=ansible | PLAY [play for deploying branch on local] **********************************************************************************************************
+2020-12-09 21:04:49,871 p=12800 u=ansible n=ansible | PLAY [play for copy data to the web server] ********************************************************************************************************
+2020-12-09 21:04:49,902 p=12800 u=ansible n=ansible | TASK [copy data to web servers] ********************************************************************************************************************
+2020-12-09 21:20:08,482 p=12868 u=ansible n=ansible | [WARNING]: sftp transfer mechanism failed on [172.27.8.165]. Use ANSIBLE_DEBUG=1 to see detailed information
+
+2020-12-09 21:20:08,550 p=12867 u=ansible n=ansible | [WARNING]: sftp transfer mechanism failed on [172.27.8.164]. Use ANSIBLE_DEBUG=1 to see detailed information
+
+2020-12-09 21:20:08,864 p=12869 u=ansible n=ansible | [WARNING]: sftp transfer mechanism failed on [172.27.8.166]. Use ANSIBLE_DEBUG=1 to see detailed information
+
+2020-12-09 21:20:18,941 p=12868 u=ansible n=ansible | [WARNING]: scp transfer mechanism failed on [172.27.8.165]. Use ANSIBLE_DEBUG=1 to see detailed information
+
+2020-12-09 21:20:18,983 p=12867 u=ansible n=ansible | [WARNING]: scp transfer mechanism failed on [172.27.8.164]. Use ANSIBLE_DEBUG=1 to see detailed information
+
+2020-12-09 21:20:19,032 p=12869 u=ansible n=ansible | [WARNING]: scp transfer mechanism failed on [172.27.8.166]. Use ANSIBLE_DEBUG=1 to see detailed information
+
+2020-12-09 21:20:39,071 p=12800 u=ansible n=ansible | fatal: [172.27.8.165]: FAILED! => {"msg": "Failed to connect to the host via ssh: ssh: connect to host 172.27.8.165 port 22: Connection timed out"}
+2020-12-09 21:20:39,134 p=12800 u=ansible n=ansible | fatal: [172.27.8.164]: FAILED! => {"msg": "Failed to connect to the host via ssh: ssh: connect to host 172.27.8.164 port 22: Connection timed out"}
+2020-12-09 21:20:39,181 p=12800 u=ansible n=ansible | fatal: [172.27.8.166]: FAILED! => {"msg": "Failed to connect to the host via ssh: ssh: connect to host 172.27.8.166 port 22: Connection timed out"}
+2020-12-09 21:20:39,191 p=12800 u=ansible n=ansible | PLAY RECAP *****************************************************************************************************************************************
+2020-12-09 21:20:39,192 p=12800 u=ansible n=ansible | 172.27.8.164               : ok=0    changed=0    unreachable=0    failed=1    skipped=0    rescued=0    ignored=0   
+2020-12-09 21:20:39,193 p=12800 u=ansible n=ansible | 172.27.8.165               : ok=0    changed=0    unreachable=0    failed=1    skipped=0    rescued=0    ignored=0   
+2020-12-09 21:20:39,193 p=12800 u=ansible n=ansible | 172.27.8.166               : ok=0    changed=0    unreachable=0    failed=1    skipped=0    rescued=0    ignored=0   
+2020-12-09 21:21:21,853 p=14088 u=ansible n=ansible | PLAY [play for deploying branch on local] **********************************************************************************************************
+2020-12-09 21:21:21,901 p=14088 u=ansible n=ansible | PLAY [play for copy data to the web server] ********************************************************************************************************
+2020-12-09 21:21:21,956 p=14088 u=ansible n=ansible | TASK [copy data to web servers] ********************************************************************************************************************
+2020-12-09 21:25:34,534 p=14088 u=ansible n=ansible | changed: [172.27.8.164]
+2020-12-09 21:25:34,660 p=14088 u=ansible n=ansible | changed: [172.27.8.166]
+2020-12-09 21:25:37,688 p=14088 u=ansible n=ansible | changed: [172.27.8.165]
+2020-12-09 21:25:37,739 p=14088 u=ansible n=ansible | PLAY [Sending messege for notification] ************************************************************************************************************
+2020-12-09 21:25:37,783 p=14088 u=ansible n=ansible | PLAY RECAP *****************************************************************************************************************************************
+2020-12-09 21:25:37,784 p=14088 u=ansible n=ansible | 172.27.8.164               : ok=1    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+2020-12-09 21:25:37,786 p=14088 u=ansible n=ansible | 172.27.8.165               : ok=1    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+2020-12-09 21:25:37,790 p=14088 u=ansible n=ansible | 172.27.8.166               : ok=1    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   

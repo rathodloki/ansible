@@ -1,0 +1,87 @@
+---
+ - name: play for deploying branch on local
+   gather_facts: false
+   hosts: local
+   vars:
+       git_dir: /home/ansible/git_deployment
+   vars_prompt:
+              name: "branch_tag"
+              prompt: 'Enter Branch or Tag Name '
+              private: no
+   tasks:
+      - name: taking git repo from branch or tag
+        block:
+        - name: Pulling from git
+          git:
+           repo: git@gitlab.com:tekno-shaft/tata-capital-logged-in.git
+           key_file: /home/ansible/.ssh/id_rsa
+           dest: "{{ git_dir }}/tata-capital-logged-in"
+           version: "{{ branch_tag }}"
+           force: yes
+           accept_hostkey: yes
+        - name: mvn clean install
+          shell: "mvn clean install"
+          args:
+              chdir: "{{ git_dir }}/tata-capital-logged-in/portal/"
+        rescue:
+        - name: Deleting Files which are pulled and trying again.
+          file:
+              path: "{{ git_dir }}/tata-capital-logged-in"
+              state: absent
+        - git:
+           repo: git@gitlab.com:tekno-shaft/tata-capital-logged-in.git
+           key_file: /home/ansible/.ssh/id_rsa
+           dest: "{{ git_dir }}/tata-capital-logged-in"
+           version: "{{ branch_tag }}"
+           force: yes
+           accept_hostkey: yes
+        - name: mvn clean install
+          shell: "mvn clean install"
+          args:
+              chdir: "{{ git_dir }}/tata-capital-logged-in/portal/"
+ 
+
+ - name: play for Deploying bundles on 52
+   vars: 
+       git_dir: /home/ansible/git_deployment
+       portal_core: "{{ git_dir }}/tata-capital-logged-in/portal/core/target/portal.core-1.0-SNAPSHOT.jar"
+   vars_prompt:
+              name: "shaft_port"
+              prompt: On which port you want to deploy |7501|7505|both ?
+              private: no
+   hosts: local
+   gather_facts: false
+   become: true    
+   become_user: root
+   tags:
+     - deploy
+   tasks:
+   - name: Deploying Bundles on 52 
+     block:
+     - name: uninstalling portal.core-1.0-SNAPSHOT.jar from 7501
+       shell: 'curl -u admin:tata123 -F action=uninstall http://172.27.16.52:7501/system/console/bundles/com.tatacapital.portal.core'
+     - name: installing portal.core-1.0-SNAPSHOT.jar from 7501
+       shell: 'curl -u admin:tata123 -F action=install -F bundlestartlevel=20 -F bundlefile=@"{{ portal_core }}" http://172.27.16.52:7501/system/console/bundles'
+     - name: Starting  portal.core-1.0-SNAPSHOT.jar from 7501
+       shell: 'curl -u admin:tata123 -F action=start http://172.27.16.52:7501/system/console/bundles/com.tatacapital.portal.core'
+     when: shaft_port == "7501" or shaft_port == "both"
+
+   - block:
+     - name: uninstalling portal.core-1.0-SNAPSHOT.jar from 7505
+       shell: 'curl -u admin:tatauat123  -F action=uninstall http://172.27.16.52:7505/system/console/bundles/com.tatacapital.portal.core'
+     - name: installing portal.core-1.0-SNAPSHOT.jar from 7505
+       shell: 'curl -u admin:tatauat123  -F action=install -F bundlestartlevel=20 -F bundlefile=@"{{ portal_core }}" http://172.27.16.52:7505/system/console/bundles'
+     - name: Starting  portal.core-1.0-SNAPSHOT.jar from 7505
+       shell: 'curl -u admin:tatauat123  -F action=start http://172.27.16.52:7505/system/console/bundles/com.tatacapital.portal.core'
+     when: shaft_port == "7505" or shaft_port == "both"
+
+ - name: Telegram Messege to remind me
+   gather_facts: false
+   hosts: local
+   tasks:
+     - name: Sending messege
+       telegram:
+         token: '1327662184:AAFeUd9puifoNOQD65ZNVdCLddHAKVEQM98'
+         chat_id: 635834411
+         msg: "Deployed {{ branch_tag }} on UAT 52-{{ shaft_port }}, Please check."
+

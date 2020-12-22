@@ -1,0 +1,116 @@
+---
+ - name: play for deploying branch on local
+   gather_facts: false
+   hosts: local
+   vars:
+       git_dir: /home/ansible/git_deployment
+   vars_prompt:
+              name: "branch_tag"
+              prompt: 'Enter Branch or Tag Name '
+              private: no
+   tasks:
+      - name: taking git repo from branch or tag
+        block:
+        - git:
+           repo: git@gitlab.com:tekno-shaft/tata-capital-li-ui.git
+           key_file: /home/ansible/.ssh/id_rsa
+           dest: "{{ git_dir }}/tata-capital-li-ui"
+           archive: "{{ git_dir }}/tata-capital-li-ui.zip"
+           version: "{{ branch_tag }}"
+           force: yes
+           accept_hostkey: yes
+        rescue:
+        - name: Deleting Files which are pulled and trying again.
+          file:
+              path: "{{ git_dir }}/tata-capital-li-ui"
+              state: absent
+        - git:
+           repo: git@gitlab.com:tekno-shaft/tata-capital-li-ui.git
+           key_file: /home/ansible/.ssh/id_rsa
+           dest: "{{ git_dir }}/tata-capital-li-ui"
+           archive: "{{ git_dir }}/tata-capital-li-ui.zip"
+           version: "{{ branch_tag }}"
+           force: yes
+           accept_hostkey: yes
+ 
+
+ - name: play for copy data to the web server
+   vars: 
+       docroot: /var/www/html
+       git_dir: /home/ansible/git_deployment
+   vars_prompt:
+              name: "uat_port"
+              prompt: On which port you want to deploy |80|8080|both ?
+              private: no
+   hosts: web
+   gather_facts: false
+   become: true    
+   become_user: root
+   tags:
+     - deploy   
+   tasks:
+   - block:
+      - name: Backup Old Data -80
+        archive:
+           path:
+              - "{{ docroot }}/tc"
+           dest: "{{ docroot }}/tc.bkp.zip"
+           format: zip 
+      - name: removing old data with folder tc
+        shell: rm -rf "{{ docroot }}"/tc/*
+        args:
+         warn: no
+      - name: extracting data to the docroot -80
+        unarchive:  
+                 src: "{{ git_dir }}/tata-capital-li-ui.zip"
+                 dest: "{{ docroot }}/tc"
+      - name: copying app-config to js-80
+        copy: 
+          src: /data/app-config.js
+          dest: "{{ docroot }}/tc/js/app-config.js"
+          remote_src: yes
+     when: uat_port == "80" or uat_port == "both"
+     rescue:
+        - name: Reverting old changes due to failure -80
+          unarchive:
+                src: "{{ docroot }}/tc.bkp.zip"
+                dest: "{{ docroot }}/"
+                copy: no
+
+   - block:
+      - name: Backup Old Data -8080
+        archive:
+           path:
+              - "{{ docroot }}/new-tc"
+           dest: "{{ docroot }}/new-tc.bkp.zip"
+           format: zip 
+      - name: removing old data with folder new-tc
+        shell: rm -rf "{{ docroot }}"/new-tc/*
+        args:
+         warn: no
+      - name: extracting  data to the docroot -8080
+        unarchive:  
+                 src: "{{ git_dir }}/tata-capital-li-ui.zip"
+                 dest: '{{ docroot }}/new-tc'
+      - name: copying app-config to js-8080
+        copy: 
+          src: /data/app-config.js
+          dest: "{{ docroot }}/new-tc/js/app-config.js"
+          remote_src: yes
+     when: uat_port == "8080"  or uat_port == "both"
+     rescue:
+        - name: Reverting old changes due to failure -8080
+          unarchive:
+                src: "{{ docroot }}/new-tc.bkp.zip"
+                dest: "{{ docroot }}/"
+                copy: no
+ - name: Telegram Messege to remind me
+   gather_facts: false
+   hosts: local
+   tasks:
+        - name: Sending messege
+          telegram:
+            token: '1327662184:AAFeUd9puifoNOQD65ZNVdCLddHAKVEQM98'
+            chat_id: 635834411
+            msg: "Deployed {{ branch_tag }} on UAT 54-{{ uat_port }}, Please check."
+
