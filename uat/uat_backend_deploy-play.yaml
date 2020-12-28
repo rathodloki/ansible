@@ -59,18 +59,18 @@
    - name: Deploying Bundles on 52 
      block:
      - name: uninstalling portal.core-1.0-SNAPSHOT.jar from 7501
-       shell: 'curl -u admin:tata123 -F action=uninstall http://ipadd:7501/system/console/bundles/com.tatacapital.portal.core'
+       shell: 'curl -u admin:admin -F action=uninstall http://ipadd:7501/system/console/bundles/com.tatacapital.portal.core'
      - name: installing portal.core-1.0-SNAPSHOT.jar from 7501
-       shell: 'curl -u admin:tata123 -F action=install -F bundlestartlevel=20 -F bundlefile=@"{{ portal_core }}" http://ipadd:7501/system/console/bundles'
+       shell: 'curl -u admin:admin -F action=install -F bundlestartlevel=20 -F bundlefile=@"{{ portal_core }}" http://ipadd:7501/system/console/bundles'
      - name: Starting  portal.core-1.0-SNAPSHOT.jar from 7501
-       shell: 'curl -u admin:tata123 -F action=start http://ipadd:7501/system/console/bundles/com.tatacapital.portal.core'
+       shell: 'curl -u admin:admin -F action=start http://ipadd:7501/system/console/bundles/com.tatacapital.portal.core'
      when: shaft_port == "7501" or shaft_port == "both"
 
    - block:
      - name: uninstalling portal.core-1.0-SNAPSHOT.jar from 7505
-       shell: 'curl -u admin:tatauat123  -F action=uninstall http://ipadd:7505/system/console/bundles/com.tatacapital.portal.core'
+       shell: 'curl -u admin:admin  -F action=uninstall http://ipadd:7505/system/console/bundles/com.tatacapital.portal.core'
      - name: installing portal.core-1.0-SNAPSHOT.jar from 7505
-       shell: 'curl -u admin:tatauat123  -F action=install -F bundlestartlevel=20 -F bundlefile=@"{{ portal_core }}" http://ipadd:7505/system/console/bundles'
+       shell: 'curl -u admin:admin  -F action=install -F bundlestartlevel=20 -F bundlefile=@"{{ portal_core }}" http://ipadd:7505/system/console/bundles'
      - name: Starting  portal.core-1.0-SNAPSHOT.jar from 7505
-       shell: 'curl -u admin:tatauat123  -F action=start http://ipadd:7505/system/console/bundles/com.tatacapital.portal.core'
+       shell: 'curl -u admin:admin  -F action=start http://ipadd:7505/system/console/bundles/com.tatacapital.portal.core'
      when: shaft_port == "7505" or shaft_port == "both"
