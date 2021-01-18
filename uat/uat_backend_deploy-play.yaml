@@ -13,38 +13,38 @@
         block:
         - name: Pulling from git
           git:
-           repo: git@gitlab.com:tekno-shaft/tata-capital-logged-in.git
+           repo: git@gitlab.com:project.git
            key_file: /home/ansible/.ssh/id_rsa
-           dest: "{{ git_dir }}/tata-capital-logged-in"
+           dest: "{{ git_dir }}"
            version: "{{ branch_tag }}"
            force: yes
            accept_hostkey: yes
         - name: mvn clean install
           shell: "mvn clean install"
           args:
-              chdir: "{{ git_dir }}/tata-capital-logged-in/portal/"
+              chdir: "{{ git_dir }}"
         rescue:
         - name: Deleting Files which are pulled and trying again.
           file:
-              path: "{{ git_dir }}/tata-capital-logged-in"
+              path: "{{ git_dir }}"
               state: absent
         - git:
-           repo: git@gitlab.com:tekno-shaft/tata-capital-logged-in.git
+           repo: git@gitlab.com:project.git
            key_file: /home/ansible/.ssh/id_rsa
-           dest: "{{ git_dir }}/tata-capital-logged-in"
+           dest: "{{ git_dir }}"
            version: "{{ branch_tag }}"
            force: yes
            accept_hostkey: yes
         - name: mvn clean install
           shell: "mvn clean install"
           args:
-              chdir: "{{ git_dir }}/tata-capital-logged-in/portal/"
+              chdir: "{{ git_dir }}"
  
 
  - name: play for Deploying bundles on 52
    vars: 
        git_dir: /home/ansible/git_deployment
-       portal_core: "{{ git_dir }}/tata-capital-logged-in/portal/core/target/portal.core-1.0-SNAPSHOT.jar"
+       portal_core: "{{ git_dir }}"
    vars_prompt:
               name: "shaft_port"
               prompt: On which port you want to deploy |7501|7505|both ?
@@ -58,19 +58,19 @@
    tasks:
    - name: Deploying Bundles on 52 
      block:
-     - name: uninstalling portal.core-1.0-SNAPSHOT.jar from 7501
-       shell: 'curl -u admin:admin -F action=uninstall http://ipadd:7501/system/console/bundles/com.tatacapital.portal.core'
-     - name: installing portal.core-1.0-SNAPSHOT.jar from 7501
-       shell: 'curl -u admin:admin -F action=install -F bundlestartlevel=20 -F bundlefile=@"{{ portal_core }}" http://ipadd:7501/system/console/bundles'
-     - name: Starting  portal.core-1.0-SNAPSHOT.jar from 7501
-       shell: 'curl -u admin:admin -F action=start http://ipadd:7501/system/console/bundles/com.tatacapital.portal.core'
+     - name: uninstalling jar from 7501
+       shell: 'curl -u admin:admin -F action=uninstall http://ipadd:7501/url'
+     - name: installing jar from 7501
+       shell: 'curl -u admin:admin -F action=install -F bundlestartlevel=20 -F bundlefile=@"{{ portal_core }}" http://ipadd:7501/url'
+     - name: Starting  jar from 7501
+       shell: 'curl -u admin:admin -F action=start http://ipadd:7501/url'
      when: shaft_port == "7501" or shaft_port == "both"
 
    - block:
-     - name: uninstalling portal.core-1.0-SNAPSHOT.jar from 7505
-       shell: 'curl -u admin:admin  -F action=uninstall http://ipadd:7505/system/console/bundles/com.tatacapital.portal.core'
-     - name: installing portal.core-1.0-SNAPSHOT.jar from 7505
-       shell: 'curl -u admin:admin  -F action=install -F bundlestartlevel=20 -F bundlefile=@"{{ portal_core }}" http://ipadd:7505/system/console/bundles'
-     - name: Starting  portal.core-1.0-SNAPSHOT.jar from 7505
-       shell: 'curl -u admin:admin  -F action=start http://ipadd:7505/system/console/bundles/com.tatacapital.portal.core'
+     - name: uninstalling jar from 7505
+       shell: 'curl -u admin:admin  -F action=uninstall http://ipadd:7505/url'
+     - name: installing jar from 7505
+       shell: 'curl -u admin:admin  -F action=install -F bundlestartlevel=20 -F bundlefile=@"{{ portal_core }}" http://ipadd:7505/url'
+     - name: Starting  jar from 7505
+       shell: 'curl -u admin:admin  -F action=start http://ipadd:7505/url'
      when: shaft_port == "7505" or shaft_port == "both"
