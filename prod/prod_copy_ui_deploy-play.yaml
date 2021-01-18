@@ -12,23 +12,23 @@
       - name: taking git repo from branch or tag
         block:
         - git:
-           repo: git@gitlab.com:tekno-shaft/tata-capital-li-ui.git
+           repo: git@gitlab.com:project.git
            key_file: /home/ansible/.ssh/id_rsa
-           dest: "{{ git_dir }}/tata-capital-li-ui"
-           archive: "{{ git_dir }}/tata-capital-li-ui.zip"
+           dest: "{{ git_dir }}/project"
+           archive: "{{ git_dir }}/project.zip"
            version: "{{ branch_tag }}"
            force: yes
            accept_hostkey: yes
         rescue:
         - name: Deleting Files which are pulled and trying again.
           file:
-              path: "{{ git_dir }}/tata-capital-li-ui"
+              path: "{{ git_dir }}/project"
               state: absent
         - git:
-           repo: git@gitlab.com:tekno-shaft/tata-capital-li-ui.git
+           repo: git@gitlab.com:project.git
            key_file: /home/ansible/.ssh/id_rsa
-           dest: "{{ git_dir }}/tata-capital-li-ui"
-           archive: "{{ git_dir }}/tata-capital-li-ui.zip"
+           dest: "{{ git_dir }}/project"
+           archive: "{{ git_dir }}/project.zip"
            version: "{{ branch_tag }}"
            force: yes
            accept_hostkey: yes
@@ -45,5 +45,5 @@
    tasks:
       - name: copy data to web servers
         copy:
-          src: "{{ git_dir }}/tata-capital-li-ui.zip"
-          dest: "{{ home_dir }}/tata-capital-li-ui.zip"
+          src: "{{ git_dir }}/project.zip"
+          dest: "{{ home_dir }}/project.zip"
