@@ -13,7 +13,7 @@
         block:
         - name: Pulling from git
           git:
-           repo: git@gitlab.com:teknopoint/project.git
+           repo: git@gitlab.com:project.git
            key_file: /home/ansible/.ssh/id_rsa
            dest: "{{ git_dir }}/project"
            version: "{{ branch_tag }}"
@@ -29,7 +29,7 @@
               path: "{{ git_dir }}/project"
               state: absent
         - git:
-           repo: git@gitlab.com:tekno-shaft/tata-capital-logged-in.git
+           repo: git@gitlab.com:project.git
            key_file: /home/ansible/.ssh/id_rsa
            dest: "{{ git_dir }}/project"
            version: "{{ branch_tag }}"
@@ -74,5 +74,3 @@
      - name: Starting  project.jar from 7505
        shell: 'curl -u admin:admin  -F action=start http://ipadd:7505/url'
      when: shaft_port == "7505" or shaft_port == "both"
-
-
