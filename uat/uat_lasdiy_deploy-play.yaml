@@ -61,7 +61,7 @@
      - name: uninstalling project.jar from 7501
        shell: 'curl -u admin:admin -F action=uninstall http://ipadd:7501/url'
      - name: installing project.jar from 7501
-       shell: 'curl -u admin:admin -F action=install -F bundlestartlevel=20 -F bundlefile=@"{{ jar_file }}" http://ipadd:7501/system/console/bundles'
+       shell: 'curl -u admin:admin -F action=install -F bundlestartlevel=20 -F bundlefile=@"{{ jar_file }}" http://ipadd:7501/url'
      - name: Starting  project.jar from 7501
        shell: 'curl -u admin:admin -F action=start http://ipadd:7501/url'
      when: shaft_port == "7501" or shaft_port == "both"
@@ -70,7 +70,7 @@
      - name: uninstalling project.jar from 7505
        shell: 'curl -u admin:admin  -F action=uninstall http://ipadd:7505/url'
      - name: installing project.jar from 7505
-       shell: 'curl -u admin:admin  -F action=install -F bundlestartlevel=20 -F bundlefile=@"{{ jar_file  }}" http://ipadd:7505/system/console/bundles'
+       shell: 'curl -u admin:admin  -F action=install -F bundlestartlevel=20 -F bundlefile=@"{{ jar_file  }}" http://ipadd:7505/url'
      - name: Starting  project.jar from 7505
        shell: 'curl -u admin:admin  -F action=start http://ipadd:7505/url'
      when: shaft_port == "7505" or shaft_port == "both"
