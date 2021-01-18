@@ -44,7 +44,7 @@
  - name: play for Deploying bundles on 52
    vars: 
        git_dir: /home/ansible/git_deployment
-       portal_core: "{{ git_dir }}"
+       jar_file: "{{ git_dir }}"
    vars_prompt:
               name: "shaft_port"
               prompt: On which port you want to deploy |7501|7505|both ?
@@ -61,7 +61,7 @@
      - name: uninstalling jar from 7501
        shell: 'curl -u admin:admin -F action=uninstall http://ipadd:7501/url'
      - name: installing jar from 7501
-       shell: 'curl -u admin:admin -F action=install -F bundlestartlevel=20 -F bundlefile=@"{{ portal_core }}" http://ipadd:7501/url'
+       shell: 'curl -u admin:admin -F action=install -F bundlestartlevel=20 -F bundlefile=@"{{ jar_file }}" http://ipadd:7501/url'
      - name: Starting  jar from 7501
        shell: 'curl -u admin:admin -F action=start http://ipadd:7501/url'
      when: shaft_port == "7501" or shaft_port == "both"
@@ -70,7 +70,7 @@
      - name: uninstalling jar from 7505
        shell: 'curl -u admin:admin  -F action=uninstall http://ipadd:7505/url'
      - name: installing jar from 7505
-       shell: 'curl -u admin:admin  -F action=install -F bundlestartlevel=20 -F bundlefile=@"{{ portal_core }}" http://ipadd:7505/url'
+       shell: 'curl -u admin:admin  -F action=install -F bundlestartlevel=20 -F bundlefile=@"{{ jar_file }}" http://ipadd:7505/url'
      - name: Starting  jar from 7505
        shell: 'curl -u admin:admin  -F action=start http://ipadd:7505/url'
      when: shaft_port == "7505" or shaft_port == "both"
