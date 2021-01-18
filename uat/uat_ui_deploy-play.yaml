@@ -12,23 +12,23 @@
       - name: taking git repo from branch or tag
         block:
         - git:
-           repo: git@gitlab.com:tekno-shaft/tata-capital-li-ui.git
+           repo: git@gitlab.com:tekno-shaft/project.git
            key_file: /home/ansible/.ssh/id_rsa
-           dest: "{{ git_dir }}/tata-capital-li-ui"
-           archive: "{{ git_dir }}/tata-capital-li-ui.zip"
+           dest: "{{ git_dir }}/project"
+           archive: "{{ git_dir }}/project.zip"
            version: "{{ branch_tag }}"
            force: yes
            accept_hostkey: yes
         rescue:
         - name: Deleting Files which are pulled and trying again.
           file:
-              path: "{{ git_dir }}/tata-capital-li-ui"
+              path: "{{ git_dir }}/project"
               state: absent
         - git:
-           repo: git@gitlab.com:tekno-shaft/tata-capital-li-ui.git
+           repo: git@gitlab.com:tekno-shaft/project.git
            key_file: /home/ansible/.ssh/id_rsa
-           dest: "{{ git_dir }}/tata-capital-li-ui"
-           archive: "{{ git_dir }}/tata-capital-li-ui.zip"
+           dest: "{{ git_dir }}/project"
+           archive: "{{ git_dir }}/project.zip"
            version: "{{ branch_tag }}"
            force: yes
            accept_hostkey: yes
@@ -62,7 +62,7 @@
          warn: no
       - name: extracting data to the docroot -80
         unarchive:  
-                 src: "{{ git_dir }}/tata-capital-li-ui.zip"
+                 src: "{{ git_dir }}/project.zip"
                  dest: "{{ docroot }}/tc"
       - name: copying app-config to js-80
         copy: 
@@ -90,7 +90,7 @@
          warn: no
       - name: extracting  data to the docroot -8080
         unarchive:  
-                 src: "{{ git_dir }}/tata-capital-li-ui.zip"
+                 src: "{{ git_dir }}/project.zip"
                  dest: '{{ docroot }}/new-tc'
       - name: copying app-config to js-8080
         copy: 
