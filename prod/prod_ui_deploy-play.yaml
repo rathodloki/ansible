@@ -1,0 +1,74 @@
+---
+ - name: play for deploying Code on '{{ hosts }}'
+   gather_facts: false
+   hosts: '{{ hosts }}'
+   become: true
+   become_user: root
+   gather_facts: false
+   tasks:
+      - name: Stopping apache on '{{ hosts }}'
+        service:
+          name: httpd
+          state: stopped
+      - name: Backup Old Data
+        archive:
+           path:
+              - "{{ docroot }}/project"
+           dest: "{{ docroot }}/project.bkp.zip"
+           remote_src: yes
+           format: zip
+      - name: removing old data with folder project
+        shell: rm -rf "{{ docroot }}/project/*"
+        args:
+         warn: no
+      - name: extracting data to the docroot
+        unarchive:
+                 src: "{{ home_dir }}/release.zip"
+                 dest: "{{ docroot }}/project"
+                 remote_src: yes
+      - name: copying app-config to js
+        copy:
+          src: '{{ app_config  }}'
+          dest: "{{ docroot }}/project/js/app-config.js"
+          remote_src: yes
+      - name: pointing to '{{ hosts }}':8080 
+        shell : mv httpd.conf httpd.80.bkp; mv httpd.8080.bkp httpd.conf
+        args:
+          chdir: /eproject/httpd/conf
+
+      - name: Restarting apache on '{{ hosts }}':8080
+        service:
+          name: httpd
+          state: restarted
+
+ - name: play for Making it Release 
+   vars_prompt: 
+         name: "live" 
+         prompt: "Do you want to make it live on 80 (yes/no)?"
+         private: no
+   become: true
+   become_user: root
+   gather_facts: false
+   hosts: '{{ hosts }}'
+   tasks:
+      - name: Pointing to 80
+        shell : mv httpd.conf httpd.8080.bkp; mv httpd.80.bkp httpd.conf        
+        args:
+           chdir: /project/httpd/conf
+        when: live == "yes"
+
+      - name: Restarting apache on '{{ hosts }}'
+        service:
+          name: httpd
+          state: restarted     
+        when: live == "yes"
+
+# - name: Sending messege for notification
+#   gather_facts: false
+#   hosts: local
+#   tasks:  
+#   - name: "send messege....." 
+#     telegram:
+#        token: '1327662184:AAFeUd9puifoNOQD65ZNVdCLddHAKVEQM98'
+#        chat_id: 635834411
+#        msg: " tag is copied on all Prod web servers"

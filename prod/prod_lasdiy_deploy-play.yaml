@@ -1,0 +1,87 @@
+---
+ - name: play for deploying branch on local
+   gather_facts: false
+   hosts: local
+   vars:
+       git_dir: /home/ansible/git_deployment
+   vars_prompt:
+              name: "branch_tag"
+              prompt: 'Enter Branch or Tag Name '
+              private: no
+   tasks:
+      - name: taking project git repo from branch or tag
+        block:
+        - name: Pulling from git
+          git:
+           repo: git@gitlab.com:project.git
+           key_file: /home/ansible/.ssh/id_rsa
+           dest: "{{ git_dir }}/project"
+           version: "{{ branch_tag }}"
+           force: yes
+           accept_hostkey: yes
+        - name: mvn clean install
+          shell: "mvn clean install"
+          args:
+              chdir: "{{ git_dir }}/project/"
+        rescue:
+        - name: Deleting Files which are pulled and trying again.
+          file:
+              path: "{{ git_dir }}/project"
+              state: absent
+        - git:
+           repo: git@gitlab.com:project.git
+           key_file: /home/ansible/.ssh/id_rsa
+           dest: "{{ git_dir }}/project"
+           version: "{{ branch_tag }}"
+           force: yes
+           accept_hostkey: yes
+        - name: mvn clean install
+          shell: "mvn clean install"
+          args:
+              chdir: "{{ git_dir }}/project/"
+ 
+
+ - name: play for copy data to the project
+   vars: 
+       git_dir: /home/ansible/git_deployment
+       project_jar: "{{ git_dir }}/project.jar"
+   vars_prompt:
+              name: "shaft_port"
+              prompt: On which port you want to deploy |180|181 ?
+              private: no
+   hosts: local
+   gather_facts: false
+   become: true    
+   become_user: root
+   tags:
+     - deploy
+   tasks:
+   - name: deploy project jar
+     block:
+     - name: uninstalling project.jar from 180
+       shell: 'curl -u admin:admin -F action=uninstall http://172.27.8.180:7501/project'
+     - name: installing project.jar from 180
+       shell: 'curl -u admin:admin -F action=install -F bundlestartlevel=20 -F bundlefile=@"{{ project_jar }}" http://172.27.8.180:7501/project'
+     - name: Starting  project.jar from 180
+       shell: 'curl -u admin:admin -F action=start http://172.27.8.180:7501/project'
+     when: shaft_port == "180"
+
+   - block:
+     - name: uninstalling project.jar from 181
+       shell: 'curl -u admin:admin  -F action=uninstall http://172.27.8.181:7501/project'
+     - name: installing project.jar from 181
+       shell: 'curl -u admin:admin  -F action=install -F bundlestartlevel=20 -F bundlefile=@"{{ project_jar  }}" http://172.27.8.181:7501/project'
+     - name: Starting  project.jar from 181
+       shell: 'curl -u admin:admin  -F action=start http://172.27.8.181:7501/project'
+     when: shaft_port == "181"
+
+ - name: Telegram Messege to remind me
+   gather_facts: false
+   hosts: local
+   tasks:
+     - name: Sending messege
+       telegram:
+         token: '1327662184:AAFeUd9puifoNOQD65ZNVdCLddHAKVEQM98'
+         chat_id: 635834411
+         msg: "project Deployed {{ branch_tag }} on Prod-{{ shaft_port }}, Please check."
+
